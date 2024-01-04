@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul id="user"></ul>
+
+
+<script>
+
+  let url = new URL (location.href);
+  console.log(url);
+
+  let userJSON = url.searchParams.get('value');
+  let user = JSON.parse(userJSON)
+  console.log(user)
+
+  fetch('https://jsonplaceholder.typicode.com/users/5')
+      .then(value => value.json())
+      .then(users => {
+          console.log(users)
+
+          let ul= document.getElementById('user');
+              let li = document.createElement('li');
+              Object.keys(user).forEach(key => {
+          let a =document.createElement('a');
+          a.innerText =` ${key}: ${user[key]}`
+              li.appendChild(a)
+              ul.appendChild(li)
+              })
+      })
+
+</script>
+</body>
+</html>
